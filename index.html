@@ -3,45 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Playground</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <script type="text/javascript" src="public/js/handle.js"></script>
+    <!--<script type="text/javascript" src="public/js/handle.js"></script>-->
 </head>
 <body>
 <!-- background(highway) -->
-<div class="container">
-    <div class="main-image">
-        <img src="public/img/2.png" alt="" align="left"/>
-        <img src="public/img/4.png" alt="" align="right"/>
-        <img src="public/img/1.png" alt="" align="left"/>
-        <img src="public/img/3.png" alt="" align="right"/>
+<div id="view-area" class="area">
+    <div id="highway" class="way">
+        <img id="way1" src="public/img/2.png" alt="" align="left"/>
+        <img id="way2" src="public/img/4.png" alt="" align="right"/>
+        <img id="way3" src="public/img/1.png" alt="" align="left"/>
+        <img id="way4" src="public/img/3.png" alt="" align="right"/>
+    </div>
+    <!--        &lt;!&ndash; CAR BODY &ndash;&gt;
+            <div id="car" class="car-body">
+                <img src="public/img/car.png"/>
+            </div>
 
-        <!-- CAR BODY -->
-        <div class="car-body">
-            <img src="public/img/car.png"/>
-        </div>
-    </div>
-    <!-- HANDLER BOARD -->
-    <div class="handler-board">
-        <img src="public/img/control_panel.png"/>
-    </div>
-    <!-- HANDLER -->
-    <div class="handler">
-        <img id="arr_off" src="public/img/arrow_off.png" />
-        <img id="arr_left" src="public/img/arrow_left_on.png" hidden/>
-        <img id="arr_right" src="public/img/arrow_right_on.png" hidden/>
-        <img id="arr_top" src="public/img/arrow_top_on.png" hidden/>
-    </div>
+            &lt;!&ndash; HANDLER BOARD &ndash;&gt;
+            <div id="board" class="handler-board">
+                <img src="public/img/control_panel.png"/>
+            </div>
+
+            &lt;!&ndash; HANDLER &ndash;&gt;
+            <div id="arrow" class="handler">
+                <img id="arr_off" src="public/img/arrow_off.png"/>
+                <img id="arr_left" src="public/img/arrow_left_on.png" hidden/>
+                <img id="arr_right" src="public/img/arrow_right_on.png" hidden/>
+                <img id="arr_top" src="public/img/arrow_top_on.png" hidden/>
+            </div>-->
 </div>
-
-<script>
-    $(function(){
-        var x = 0;
-        setInterval(function(){
-            x-=1;
-            $('body').css('background-position', '0 ' + x + 'px');
-        }, 50);
-    });
-</script>
 
 </body>
 </html>
