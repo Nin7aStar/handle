@@ -34,14 +34,26 @@ body, html {
     right: 375px;
 }
 
+div#car img {
+    max-width:  70%;
+}
+
 .handler-board {
     position: absolute;
     bottom: 0px;
     left: 0px;
 }
 
+div#board img {
+    max-width:  65%;
+}
+
 .handler {
     position: absolute;
-    bottom: 55px;
-    left: 180px;
+    bottom: 50px;
+    left: 190px;
+}
+
+div#arrow img {
+    max-width:  50%;
 }
