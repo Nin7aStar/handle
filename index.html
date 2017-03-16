@@ -5,29 +5,62 @@
     <title>Welcome to Playground</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <script type="text/javascript" src="public/js/handle.js"></script>
+    <!--<script type="text/javascript" src="public/js/handle.js"></script>-->
 </head>
 <body>
 <!-- background(highway) -->
-<div id="view-area" class="area">
-    <div id="highway" class="way">
-        <img id="way1" src="public/img/2.png" alt="" align="left"/>
-        <img id="way2" src="public/img/4.png" alt="" align="right"/>
-        <img id="way3" src="public/img/1.png" alt="" align="left"/>
-        <img id="way4" src="public/img/3.png" alt="" align="right"/>
-    </div>
+<div class="area" id="view-area" >
     <!-- CAR BODY -->
-    <div id="car" class="car-body">
-        <img src="public/img/car.png"/>
+    <div class="car-body" id="car" >
+        <img class="img_car" id="img_car_top" src="public/img/car.png"/>
+        <img class="img_car" id="img_car_left" src="public/img/car_left.png" style="display: none;"/>
+        <img class="img_car" id="img_car_right" src="public/img/car_right.png"style="display: none;"/>
+    </div>
+    <!-- WAY -->
+    <div class="way" data-item="0">
+        <div class="div-part" data-subitem="0">
+            <img src="public/img/1.png" />
+        </div>
+        <div class="div-part" data-subitem="1">
+            <img src="public/img/2.png" />
+        </div>
+        <div class="div-part" data-subitem="2">
+            <img src="public/img/3.png" />
+        </div>
+        <!--<img id="way4" src="public/img/3.png" align="right"/>-->
+    </div>
+
+    <div class="way" data-item="1">
+        <div class="div-part" data-subitem="0">
+            <img src="public/img/4.png" />
+        </div>
+        <div class="div-part" data-subitem="1">
+            <img src="public/img/3.png" />
+        </div>
+        <div class="div-part" data-subitem="2">
+            <img src="public/img/2.png" />
+        </div>
+    </div>
+
+    <div class="way" data-item="2">
+        <div class="div-part" data-subitem="0">
+            <img src="public/img/2.png" />
+        </div>
+        <div class="div-part" data-subitem="1">
+            <img src="public/img/3.png" />
+        </div>
+        <div class="div-part" data-subitem="2">
+            <img src="public/img/4.png" />
+        </div>
     </div>
 
     <!-- HANDLER BOARD -->
-    <div id="board" class="handler-board">
+    <div class="handler-board" id="board" >
         <img src="public/img/control_panel.png"/>
     </div>
 
     <!-- HANDLER -->
-    <div id="arrow" class="handler">
+    <div class="handler" id="arrow" >
         <img id="arr_off" src="public/img/arrow_off.png"/>
         <img id="arr_left" src="public/img/arrow_left_on.png" hidden/>
         <img id="arr_right" src="public/img/arrow_right_on.png" hidden/>

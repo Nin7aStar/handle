@@ -19,28 +19,34 @@ body, html {
     position: relative;
     width:  800px;
     height: 800px;
+    left:   150px;
+    top:    70px;
     border: 5px groove #48BAE4;
 }
 
 .way {
     position: absolute;
-    width: 100%;
-    height: 100%;
+}
+
+.div-part {
+    position: absolute;
 }
 
 .car-body {
     position: absolute;
-    top: 365px;
-    right: 375px;
+    top: 353.65px;
+    right: 378.65px;
+    z-index: 9999;
 }
 
-div#car img {
-    max-width:  70%;
+img_car {
+    width:  81.7px;
+    height: 81.7px;
 }
 
 .handler-board {
     position: absolute;
-    bottom: 0px;
+    bottom: -4px;
     left: 0px;
 }
 
