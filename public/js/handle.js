@@ -3,7 +3,9 @@ var KEY_UP = 38,
     KEY_RIGHT = 39;
 
 var carImages = ['top', 'left', 'right'];
-
+/**
+ *
+ */
 $(function () {
     var x = 0;
 
