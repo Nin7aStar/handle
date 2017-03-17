@@ -4,9 +4,9 @@ body, html {
     padding: 0;
 }
 
-/*img {
-    max-width: 50%;
-}*/
+div {
+    display: block;
+}
 
 .container {
     position: relative;
@@ -17,6 +17,7 @@ body, html {
 
 .area {
     position: relative;
+    overflow: hidden;
     width:  800px;
     height: 800px;
     left:   150px;
@@ -39,27 +40,32 @@ body, html {
     z-index: 9999;
 }
 
-img_car {
-    width:  81.7px;
-    height: 81.7px;
+.car-time {
+    position: absolute;
+    left:   57px;
+    top:    70px;
+}
+
+.car-time > span {
+    color:  #15e049;
+    font-size:  52px;
 }
 
 .handler-board {
     position: absolute;
     bottom: -4px;
-    left: 0px;
 }
 
-div#board img {
-    max-width:  65%;
+div.handler-board > img {
+    width:  479px;
 }
 
 .handler {
     position: absolute;
-    bottom: 50px;
-    left: 190px;
+    bottom: 30px;
+    left: 130px;
 }
 
-div#arrow img {
+/*div#arrow img {
     max-width:  50%;
-}
+}*/
