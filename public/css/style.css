@@ -35,8 +35,8 @@ div {
 
 .car-body {
     position: absolute;
-    top: 353.65px;
-    right: 378.65px;
+    /*top: 353.65px;*/
+    /*right: 378.65px;*/
     z-index: 9999;
 }
 
