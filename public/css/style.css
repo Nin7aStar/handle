@@ -18,11 +18,6 @@ div {
 .area {
     position: relative;
     overflow: hidden;
-    width:  800px;
-    height: 800px;
-    left:   150px;
-    top:    70px;
-    border: 5px groove #48BAE4;
 }
 
 .way {
@@ -35,20 +30,15 @@ div {
 
 .car-body {
     position: absolute;
-    /*top: 353.65px;*/
-    /*right: 378.65px;*/
     z-index: 9999;
 }
 
 .car-time {
     position: absolute;
-    left:   57px;
-    top:    70px;
 }
 
 .car-time > span {
     color:  #15e049;
-    font-size:  52px;
 }
 
 .handler-board {

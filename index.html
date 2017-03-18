@@ -12,23 +12,21 @@
 <div class="area" id="view-area" >
     <!-- CAR BODY -->
     <div class="car-body" id="car">
-        <img class="img_car" id="img_car_top" src="public/img/car.png"/>
+        <img class="img_car" id="img_car_top" src="public/img/car_top.png"/>
         <img class="img_car" id="img_car_left" src="public/img/car_left.png" style="display: none;"/>
         <img class="img_car" id="img_car_right" src="public/img/car_right.png"style="display: none;"/>
     </div>
     <!-- WAY -->
-    <div class="way" id="way-block-a">
-        <div class="div-part" id="leftPanel">
+    <div class="way" id="way-block-a" data-item="0">
+        <div class="div-part" data-subitem="0">
             <img src="public/img/1.png" />
         </div>
-        <div class="div-part" id="centerPanel">
+        <div class="div-part" data-subitem="1">
             <img src="public/img/2.png" />
         </div>
-        <div class="div-part" id="rightPanel">
-
+        <div class="div-part" data-subitem="2">
             <img src="public/img/3.png" />
         </div>
-        <!--<img id="way4" src="public/img/3.png" align="right"/>-->
     </div>
     <div class="way" id="way-block-b" data-item="1">
         <div class="div-part" data-subitem="0">
@@ -59,7 +57,7 @@
             <span>00:00</span>
         </div>
         <!-- HANDLER -->
-        <div class="handler" id="arrow" >
+        <div class="handler">
             <img id="arr_off" src="public/img/arrow_off.png"/>
             <img id="arr_left" src="public/img/arrow_left_on.png" hidden/>
             <img id="arr_right" src="public/img/arrow_right_on.png" hidden/>

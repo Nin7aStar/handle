@@ -7,6 +7,7 @@ var carImages = ['top', 'left', 'right'];
  *
  */
 $(function () {
+    var boundX, boundY;
     var carWidth, carHeight;
     var v_count = 3, h_count = 3;
     var unit = 2.7;
@@ -17,14 +18,12 @@ $(function () {
     /**
      * checking the resize of screen initially
      */
-    function resize(){
-        //  window's size
-        var mainWidth = parseInt($(window).width());
-        var mainHeight = parseInt($(window).height());
+    function resize() {
+        var mainWidth = parseInt($(window).width()),
+            mainHeight = parseInt($(window).height());
 
         // view area coordinate (x, y : width, height)
-        var boundX = parseInt(document.getElementById('view-area').offsetWidth) - 10;
-        var boundY = parseInt(document.getElementById('view-area').offsetHeight) - 10;
+        boundX = boundY = Math.min(mainWidth, mainHeight) - 150;
 
         // size of car
         carWidth = boundX / 10;
@@ -35,9 +34,9 @@ $(function () {
         unit = width / t_ms * 16.5;
 
         // set the size of car
-        // $('.img_car')
-        //     .width(carWidth)
-        //     .height(carHeight);
+        $('.img_car')
+            .width(carWidth)
+            .height(carHeight);
         $('.car-body')
             .css('right', ((boundX - carWidth)/2)+'px')
             .css('top', ((boundY - carHeight)/2)+'px');
@@ -45,7 +44,7 @@ $(function () {
         // set the way
         $.each($('.way'), function (k, v) {
             $(v).height(height)
-                .css('top', k * height);
+                .css('top', (k * height) - 200);
             $.each($('.div-part', $(v)), function (key, val) {
                 $(val).width(width)
                     .height(height)
@@ -53,6 +52,28 @@ $(function () {
             });
         });
 
+        var margin = (mainWidth - boundX) / 2;
+        var top = (mainHeight - boundY) / 2;
+        $('#view-area')
+            .width(boundX)
+            .height(boundY)
+            .css('left', margin + 'px')
+            .css('top', top + 'px');
+
+        var ctlWidth = parseInt(boundX * 9 / 16),
+            arrow_pan_width = parseInt(ctlWidth * 2 / 3);
+        $('#img_handler').width(ctlWidth);
+
+        $('.handler')
+            .width(arrow_pan_width);
+
+        $('.car-time')
+            .css('left', ctlWidth/10 + 'px')
+            .css('top', ctlWidth/635*449/5 + 'px');
+        $('.car-time>span')
+            .css('font-size', ctlWidth/9 + 'px');
+
+        $('body').scrollTop(0);
     }
 
     resize();
@@ -66,29 +87,5 @@ $(function () {
             x = 0;
         }
     }, 90);*/
-
-    // move to top
-    var moveTop = function () {
-        setInterval(function () {
-            x += 5;
-            $('.way').animate({'top': x + 'px'}, 50);
-        }, 90);
-    };
-
-    // move to left
-    var moveLeft = function () {
-        setInterval(function () {
-            x += 5;
-            $('.way').animate({'left': x + 'px'}, 50);
-        }, 90);
-    };
-
-    // move to right
-    var moveRight = function () {
-        setInterval(function () {
-            x += 5;
-            $('.way').animate({'right': x + 'px'}, 50);
-        }, 90);
-    };
 });
 
