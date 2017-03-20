@@ -82,15 +82,66 @@ $(document).ready(function () {
     };
 
     resize();
-    startTimer = setInterval(moveSub, ms_interval);
+    // startTimer = setInterval(moveSub, ms_interval);
+    setInterval(moveSub, ms_interval);
+
+    /**
+     *
+     * @returns {number}
+     */
+    function checkReorderItem() {
+        if (fDirection == 0) {		// move up
+            var top = parseFloat($('*[data-item="0"]').css('top'));
+            if (top <= 0 && top + unit >= 0) {
+                return 1;
+            }
+        }
+        else if (fDirection == 1) {		// move left
+            var left = parseFloat($('*[data-subitem="2"]').css('left'));
+            if (left <= boundX && left + unit >= boundX) {
+                return 1;
+            }
+        }
+        else if (fDirection == 2) {		// move right
+            var left = parseFloat($('*[data-subitem="0"]').css('left'));
+            if (left + width >= 0 && left + width - unit <= 0) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 
     /**
      * action
      */
     function moveSub() {
-        x += 5;
-        // $('.area').animate({'top': x + 'px'}, 50);
-    }
+        var bNew = checkReorderItem();
 
+        if (fDirection == 0) {		// move up
+            // if (bNew && fDirection != tmp_direction_flag) {
+            if (bNew && fDirection != 0) {
+                for (var i = 0; i < v_count; i++) {
+                    var val = $('*[data-item="' + i + '"]');
+                    val.css('top', (i * height) + 'px');
+                }
+                fDirection = 0;
+                $('.img_car').hide();
+                $('#img_car_' + carImages[fDirection]).show();
+            } else {
+                $.each($('.way'), function (key, val) {
+                    $(val).css('top', '+=' + unit + 'px');
+                    if (bNew) {
+                        var item = $(val).attr('data-item');
+                        var new_val = (item + 1) % v_count;
+                        $(val).attr('data-item', new_val);
+                        if (new_val == 0) {
+                            var top = parseFloat($(val).css('top'));
+                            $(val).css('top', (top - height * v_count) + 'px');
+                        }
+                    }
+                });
+            }
+        }
+    }
 });
 
