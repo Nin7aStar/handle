@@ -6,7 +6,7 @@ var carImages = ['top', 'left', 'right'];
 var startTimer;
 var route;
 var correct_route = 0;
-var x = 0;
+
 /**
  *
  */
@@ -15,6 +15,7 @@ $(document).ready(function () {
     var carWidth, carHeight;
     var v_count = 3, h_count = 3;
     var fDirection = 0;     // 0: up, 1: left, 2: right
+    var tmp_direction_flag = 0;     // default: 0(up)
     var unit = 2.7;
     var ms_interval = 30;
     var t_ms = 60 * 1000 / ms_interval;
@@ -111,15 +112,102 @@ $(document).ready(function () {
         return 0;
     }
 
+    document.onkeydown = function (event) {
+        event = event || window.event;
+        switch (event.keyCode) {
+            case KEY_UP:
+                bNew = checkReorderItem();
+                upArrowPressed();
+                break;
+            case KEY_LEFT:
+                leftArrowPressed();
+                break;
+            case KEY_RIGHT:
+                rightArrowPressed();
+                break;
+        }
+    }
+    /**
+     *  turn to up
+     */
+    function upArrowPressed() {
+        // your stuff here
+        console.log("Up is pressed.");
+    }
+
+    /**
+     *  turn to left
+     */
+    function leftArrowPressed() {
+        // your stuff here
+        console.log("Left is pressed.");
+    }
+
+    /**
+     *  turn to right
+     */
+    function rightArrowPressed() {
+       // your stuff here
+        console.log("Right is pressed.");
+    }
     /**
      * action
      */
     function moveSub() {
         var bNew = checkReorderItem();
 
-        if (fDirection == 0) {		// move up
-            // if (bNew && fDirection != tmp_direction_flag) {
-            if (bNew && fDirection != 0) {
+        if (fDirection == 1) {		// move left
+            if (bNew && fDirection != tmp_direction_flag) {
+                for (var i=0;i<h_count;i++) {
+                    var val = $('*[data-subitem="'+i+'"]');
+                    val.css('left', (i*width)+'px');
+                }
+                fDirection = tmp_direction_flag;
+                $('.img_car').hide();
+                $('#img_car_' + carImages[fDirection]).show();
+            } else {
+                $.each($('.way'), function (key, val) {
+                    $(val).css('left', '+='+unit+'px');
+                    if (b_new) {
+                        var item = $(val).attr('data-subitem');
+                        var new_val = (item + 1) % h_count;
+                        $(val).attr('data-subitem', new_val);
+                        if (new_val == 0) {
+                            var left = parseFloat($(val).css('left'));
+                            $(val).css('left', (left-width*h_count)+'px');
+                        }
+                    }
+                });
+            }
+        }
+        else if (fDirection == 2) {		// move right
+            if (bNew && fDirection != tmp_direction_flag) {
+                $.each($('.div-part'), function (key, val) {
+                    var item = $(val).attr('data-subitem');
+                    var new_val = (item == 0) ? h_count-1 : item-1;
+                    $(val).attr('data-subitem', new_val);
+                    $(val).css('left', (width*new_val)+'px');
+                });
+                fDirection = tmp_direction_flag;
+                $('.img_car').hide();
+                $('#img_car_' + carImages[fDirection]).show();
+            } else {
+                $.each($('.way'), function (key, val) {
+                    $(val).css('left', '-='+unit+'px');
+                    if (b_new) {
+                        var item = $(val).attr('data-subitem');
+                        var new_val = (item == 0) ? h_count-1 : item-1;
+                        $(val).attr('data-subitem', new_val);
+                        if (new_val == h_count - 1) {
+                            var left = parseFloat($(val).css('left'));
+                            $(val).css('left', (left+width*h_count)+'px');
+                        }
+                    }
+                });
+            }
+        }
+        else if (fDirection == 0) {		// move up
+            if (bNew && fDirection != tmp_direction_flag) {
                 for (var i = 0; i < v_count; i++) {
                     var val = $('*[data-item="' + i + '"]');
                     val.css('top', (i * height) + 'px');
