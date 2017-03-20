@@ -6,6 +6,7 @@ var carImages = ['top', 'left', 'right'];
 var startTimer;
 var route;
 var correct_route = 0;
+var x = 0;
 /**
  *
  */
@@ -80,171 +81,16 @@ $(document).ready(function () {
         $('body').scrollTop(0);
     };
 
-    // startTimer = function () {
-        resize();
-    // };
+    resize();
+    startTimer = setInterval(moveSub, ms_interval);
 
     /**
-     *
-     * @returns {number}
-     */
-    function checkReorderItem() {
-        if (fDirection == 0) {		// move up
-            var top = parseFloat($('*[data-item="0"]').css('top'));
-            if (top <= 0 && top + unit >= 0) {
-                return 1;
-            }
-        }
-        else if (fDirection == 1) {		// move left
-            var left = parseFloat($('*[data-subitem="2"]').css('left'));
-            if (left <= parent_width && left + unit >= parent_width) {
-                return 1;
-            }
-        }
-        else if (fDirection == 2) {		// move right
-            var left = parseFloat($('*[data-subitem="0"]').css('left'));
-            if (left + width >= 0 && left + width - unit <= 0) {
-                return 1;
-            }
-        }
-        return 0;
-    };
-
-    /**
-     *
-     * @param keyCode
-     */
-    function showArrow(keyCode) {
-        if (keyCode == 2) {
-            $('.handler>img').hide();
-            $('#arr_right').show();
-        }
-        else if (keyCode == 1) {
-            $('.handler>img').hide();
-            $('#arr_left').show();
-        }
-        else if (keyCode == 0) {
-            $('.handler>img').hide();
-            $('#arr_top').show();
-        } else {
-            $('.handler>img').hide();
-            $('#arr_off').show();
-        }
-    };
-
-    /**
-     *
+     * action
      */
     function moveSub() {
-        var b_new = checkReorderItem();
-
-        if (fDirection == 1) {		// move left
-            if (b_new && fDirection != tmp_direction_flag) {
-                for (var i=0;i<h_count;i++) {
-                    var val = $('*[data-subitem="'+i+'"]');
-                    val.css('left', (i*width)+'px');
-                }
-                fDirection = tmp_direction_flag;
-                $('.img_car').hide();
-                $('#img_car_' + carImages[fDirection]).show();
-            } else {
-                $.each($('.div-part'), function (key, val) {
-                    $(val).css('left', '+='+unit+'px');
-                    if (b_new) {
-                        var item = $(val).attr('data-subitem');
-                        var new_val = (item + 1) % h_count;
-                        $(val).attr('data-subitem', new_val);
-                        if (new_val == 0) {
-                            var left = parseFloat($(val).css('left'));
-                            $(val).css('left', (left-width*h_count)+'px');
-                        }
-                    }
-                });
-            }
-        }
-        else if (fDirection == 2) {		// move right
-            if (b_new && fDirection != tmp_direction_flag) {
-                $.each($('.div-part'), function (key, val) {
-                    var item = $(val).attr('data-subitem');
-                    var new_val = (item == 0) ? h_count-1 : item-1;
-                    $(val).attr('data-subitem', new_val);
-                    $(val).css('left', (width*new_val)+'px');
-                });
-                fDirection = tmp_direction_flag;
-                $('.img_car').hide();
-                $('#img_car_' + car_images[fDirection]).show();
-            } else {
-                $.each($('.div-part'), function (key, val) {
-                    $(val).css('left', '-='+unit+'px');
-                    if (b_new) {
-                        var item = $(val).attr('data-subitem');
-                        var new_val = (item == 0) ? h_count-1 : item-1;
-                        $(val).attr('data-subitem', new_val);
-                        if (new_val == h_count - 1) {
-                            var left = parseFloat($(val).css('left'));
-                            $(val).css('left', (left+width*h_count)+'px');
-                        }
-                    }
-                });
-            }
-        }
-        else if (fDirection == 0) {		// move up
-            if (b_new && fDirection != tmp_direction_flag) {
-                for (var i=0;i<v_count;i++) {
-                    var val = $('*[data-item="'+i+'"]');
-                    val.css('top', (i*height)+'px');
-                }
-                fDirection = tmp_direction_flag;
-                $('.img_car').hide();
-                $('#img_car_' + car_images[fDirection]).show();
-            } else {
-                $.each($('.sub-parent'), function (key, val) {
-                    $(val).css('top', '+='+unit+'px');
-                    if (b_new) {
-                        var item = $(val).attr('data-item');
-                        var new_val = (item + 1) % v_count;
-                        $(val).attr('data-item', new_val);
-                        if (new_val == 0) {
-                            var top = parseFloat($(val).css('top'));
-                            $(val).css('top', (top-height*v_count)+'px');
-                        }
-                    }
-                });
-            }
-        }
-
-        // display the instructions
-        if (b_new && (subcount - tcount) > 1) {
-            if (route[route_id] != fDirection) {
-                console.log(route_id + " wrong : " + route[route_id] + "," + fDirection);
-            }
-            else {
-                console.log(route_id + " right : " + route[route_id] + "," + fDirection);
-                correct_route ++;
-            }
-            route_id ++;
-            showArrow(undefined);
-
-            subcount = tcount;
-        }
-        else if (tcount == subcount - 70) {
-            showArrow(route[route_id]);
-        }
-
-        if ((--tcount) <= 0) {		// stop the timer when the time is up
-            clearInterval(tid);
-            $('#emergenteCuestionario').show();
-            $('#textoA').text('Score : ' + correct_route + '/16');
-        }
-        var sec = parseInt(tcount*ms_interval / 1000);
-        var msec = parseInt((tcount*ms_interval - sec*1000) / 10);
-        if (sec < 10) sec = "0" + sec;
-        if (msec < 10) msec = "0" + msec;
-        $('.car-time > span').text(sec+":"+msec);
-
-    };
-
-    setInterval(moveSub, ms_interval);
+        x += 5;
+        // $('.area').animate({'top': x + 'px'}, 50);
+    }
 
 });
 
