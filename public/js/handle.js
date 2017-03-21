@@ -134,22 +134,25 @@ $(document).ready(function () {
      * action
      */
     function moveSub() {
-        var bNew = checkReorderItem();
-
         document.onkeydown = function (event) {
             event = event || window.event;
             switch (event.keyCode) {
                 case KEY_UP:
                     fDirection = 0;
+                    tmp_direction_flag = 0;
                     break;
                 case KEY_LEFT:
                     fDirection = 1;
+                    tmp_direction_flag = 1;
                     break;
                 case KEY_RIGHT:
                     fDirection = 2;
+                    tmp_direction_flag = 2;
                     break;
             }
         }
+
+        var bNew = checkReorderItem();
 
         if (fDirection == 1) {		// move left
             if (bNew && fDirection != tmp_direction_flag) {
