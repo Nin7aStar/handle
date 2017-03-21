@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     resize();
     // startTimer = setInterval(moveSub, ms_interval);
-    // setInterval(moveSub, ms_interval);
+    setInterval(moveSub, ms_interval);
 
     /**
      *
@@ -112,120 +112,44 @@ $(document).ready(function () {
         return 0;
     }
 
-    document.onkeydown = function (event) {
+/*    document.onkeydown = function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case KEY_UP:
                 bNew = checkReorderItem();
-                upArrowPressed();
+                // upArrowPressed();
                 break;
             case KEY_LEFT:
                 bNew = checkReorderItem();
-                leftArrowPressed();
+                // leftArrowPressed();
                 break;
             case KEY_RIGHT:
                 bNew = checkReorderItem();
-                rightArrowPressed();
+                // rightArrowPressed();
                 break;
         }
-    }
-    /**
-     *  turn to up
-     */
-    function upArrowPressed() {
-        // your stuff here
-        console.log("Up is pressed.");
-        if (bNew && fDirection != tmp_direction_flag) {
-            for (var i = 0; i < v_count; i++) {
-                var val = $('*[data-item="' + i + '"]');
-                val.css('top', (i * height) + 'px');
-            }
-            fDirection = 0;
-            $('.img_car').hide();
-            $('#img_car_' + carImages[fDirection]).show();
-        } else {
-            $.each($('.way'), function (key, val) {
-                $(val).css('top', '+=' + unit + 'px');
-                if (bNew) {
-                    var item = $(val).attr('data-item');
-                    var new_val = (item + 1) % v_count;
-                    $(val).attr('data-item', new_val);
-                    if (new_val == 0) {
-                        var top = parseFloat($(val).css('top'));
-                        $(val).css('top', (top - height * v_count) + 'px');
-                    }
-                }
-            });
-        }
-    }
+    }*/
 
-    /**
-     *  turn to left
-     */
-    function leftArrowPressed() {
-        // your stuff here
-        console.log("Left is pressed.");
-        if (bNew && fDirection != tmp_direction_flag) {
-            for (var i=0;i<h_count;i++) {
-                var val = $('*[data-subitem="'+i+'"]');
-                val.css('left', (i*width)+'px');
-            }
-            fDirection = tmp_direction_flag;
-            $('.img_car').hide();
-            $('#img_car_' + carImages[fDirection]).show();
-        } else {
-            $.each($('.way'), function (key, val) {
-                $(val).css('left', '+='+unit+'px');
-                if (bNew) {
-                    var item = $(val).attr('data-subitem');
-                    var new_val = (item + 1) % h_count;
-                    $(val).attr('data-subitem', new_val);
-                    if (new_val == 0) {
-                        var left = parseFloat($(val).css('left'));
-                        $(val).css('left', (left-width*h_count)+'px');
-                    }
-                }
-            });
-        }
-    }
-
-    /**
-     *  turn to right
-     */
-    function rightArrowPressed() {
-       // your stuff here
-        console.log("Right is pressed.");
-        if (bNew && fDirection != tmp_direction_flag) {
-            $.each($('.div-part'), function (key, val) {
-                var item = $(val).attr('data-subitem');
-                var new_val = (item == 0) ? h_count-1 : item-1;
-
-                $(val).attr('data-subitem', new_val);
-                $(val).css('left', (width*new_val)+'px');
-            });
-            fDirection = tmp_direction_flag;
-            $('.img_car').hide();
-            $('#img_car_' + carImages[fDirection]).show();
-        } else {
-            $.each($('.way'), function (key, val) {
-                $(val).css('left', '-='+unit+'px');
-                if (bNew) {
-                    var item = $(val).attr('data-subitem');
-                    var new_val = (item == 0) ? h_count-1 : item-1;
-                    $(val).attr('data-subitem', new_val);
-                    if (new_val == h_count - 1) {
-                        var left = parseFloat($(val).css('left'));
-                        $(val).css('left', (left+width*h_count)+'px');
-                    }
-                }
-            });
-        }
-    }
     /**
      * action
      */
     function moveSub() {
         var bNew = checkReorderItem();
+
+        document.onkeydown = function (event) {
+            event = event || window.event;
+            switch (event.keyCode) {
+                case KEY_UP:
+                    fDirection = 0;
+                    break;
+                case KEY_LEFT:
+                    fDirection = 1;
+                    break;
+                case KEY_RIGHT:
+                    fDirection = 2;
+                    break;
+            }
+        }
 
         if (fDirection == 1) {		// move left
             if (bNew && fDirection != tmp_direction_flag) {
