@@ -82,9 +82,10 @@ $(document).ready(function () {
         $('body').scrollTop(0);
     };
 
+
     resize();
-    // startTimer = setInterval(moveSub, ms_interval);
-    setInterval(moveSub, ms_interval);
+    startTimer = setInterval(moveSub, ms_interval);
+    // setInterval(moveSub, ms_interval);
 
     /**
      *
@@ -112,23 +113,27 @@ $(document).ready(function () {
         return 0;
     }
 
-/*    document.onkeydown = function (event) {
-        event = event || window.event;
-        switch (event.keyCode) {
-            case KEY_UP:
-                bNew = checkReorderItem();
-                // upArrowPressed();
-                break;
-            case KEY_LEFT:
-                bNew = checkReorderItem();
-                // leftArrowPressed();
-                break;
-            case KEY_RIGHT:
-                bNew = checkReorderItem();
-                // rightArrowPressed();
-                break;
+    /**
+     *
+     * @param keyCode
+     */
+    function showArrow(keyCode) {
+        if (keyCode == 2) {
+            $('.handler>img').hide();
+            $('#arr_right').show();
         }
-    }*/
+        else if (keyCode == 1) {
+            $('.handler>img').hide();
+            $('#arr_left').show();
+        }
+        else if (keyCode == 0) {
+            $('.handler>img').hide();
+            $('#arr_top').show();
+        } else {
+            $('.handler>img').hide();
+            $('#arr_off').show();
+        }
+    }
 
     /**
      * action
@@ -229,6 +234,33 @@ $(document).ready(function () {
                 });
             }
         }
+
+        // display the instructions
+        if (bNew && (subcount - tcount) > 1) {
+            // if (route[route_id] != fDirection) {
+            //     console.log(route_id + " wrong : " + route[route_id] + "," + fDirection);
+            // }
+            // else {
+            //     console.log(route_id + " right : " + route[route_id] + "," + fDirection);
+            //     correct_route ++;
+            // }
+            // route_id ++;
+            // showArrow(undefined);
+            //
+            // subcount = tcount;
+        }
+        else if (tcount == subcount - 70) {
+            // showArrow(route[route_id]);
+        }
+
+        if ((--tcount) <= 0) {		// stop the timer when the time is up
+            clearInterval(startTimer);
+        }
+        var sec = parseInt(tcount*ms_interval / 1000);
+        var msec = parseInt((tcount*ms_interval - sec*1000) / 10);
+        if (sec < 10) sec = "0" + sec;
+        if (msec < 10) msec = "0" + msec;
+        $('.car-time > span').text(sec+":"+msec);
     }
 });
 
