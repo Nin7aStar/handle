@@ -2,10 +2,8 @@ var KEY_UP = 38,
     KEY_LEFT = 37,
     KEY_RIGHT = 39;
 
-var carImages = ['top', 'left', 'right'];
+var carImages = ['top', 'left', 'right'];   // 0, 1, 2
 var startTimer;
-var route;
-var correct_route = 0;
 
 /**
  *
@@ -85,7 +83,6 @@ $(document).ready(function () {
 
     resize();
     startTimer = setInterval(moveSub, ms_interval);
-    // setInterval(moveSub, ms_interval);
 
     /**
      *
@@ -114,29 +111,7 @@ $(document).ready(function () {
     }
 
     /**
-     *
-     * @param keyCode
-     */
-    function showArrow(keyCode) {
-        if (keyCode == 2) {
-            $('.handler>img').hide();
-            $('#arr_right').show();
-        }
-        else if (keyCode == 1) {
-            $('.handler>img').hide();
-            $('#arr_left').show();
-        }
-        else if (keyCode == 0) {
-            $('.handler>img').hide();
-            $('#arr_top').show();
-        } else {
-            $('.handler>img').hide();
-            $('#arr_off').show();
-        }
-    }
-
-    /**
-     * action
+     * main action
      */
     function moveSub() {
         document.onkeydown = function (event) {
@@ -145,14 +120,20 @@ $(document).ready(function () {
                 case KEY_UP:
                     fDirection = 0;
                     tmp_direction_flag = 0;
+                    $('.handler>img').hide();
+                    $('#arr_top').show();
                     break;
                 case KEY_LEFT:
                     fDirection = 1;
                     tmp_direction_flag = 1;
+                    $('.handler>img').hide();
+                    $('#arr_left').show();
                     break;
                 case KEY_RIGHT:
                     fDirection = 2;
                     tmp_direction_flag = 2;
+                    $('.handler>img').hide();
+                    $('#arr_right').show();
                     break;
             }
         }
@@ -235,24 +216,10 @@ $(document).ready(function () {
             }
         }
 
-        // display the instructions
-        if (bNew && (subcount - tcount) > 1) {
-            // if (route[route_id] != fDirection) {
-            //     console.log(route_id + " wrong : " + route[route_id] + "," + fDirection);
-            // }
-            // else {
-            //     console.log(route_id + " right : " + route[route_id] + "," + fDirection);
-            //     correct_route ++;
-            // }
-            // route_id ++;
-            // showArrow(undefined);
-            //
-            // subcount = tcount;
-        }
-        else if (tcount == subcount - 70) {
-            // showArrow(route[route_id]);
-        }
+        $('.handler>img').hide();
+        $('#arr_off').show();
 
+        // display the instructions
         if ((--tcount) <= 0) {		// stop the timer when the time is up
             clearInterval(startTimer);
         }
